@@ -215,6 +215,7 @@ function taskData(){
         }
         setId++;
     }
+    $('#abs').setAttribute('src',`./data/abs/${data.number}.jpg`)
 }
 taskData();
 
@@ -224,6 +225,12 @@ function done(){
     }else{
         data.workout++;
     }
+    if(data.number==16){
+        data.number=1;
+    }else{
+        data.number++;
+    }
+
     localStorage.setItem("gymData",`${JSON.stringify(data)}`);
     taskData();
 }
