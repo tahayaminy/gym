@@ -1,4 +1,4 @@
-var data = {
+let data = {
     arr: [
         [
             [
@@ -180,6 +180,13 @@ var data = {
     workout: 0,
     number: 1
 };
+let dataWR;
+if(localStorage.getItem("gymData")===null){
+    localStorage.setItem("gymData",`${JSON.stringify(data)}`);
+}else{
+    dataWR=localStorage.getItem("gymData");
+    data=JSON.parse(dataWR);
+}
 const $ = el => {
     return document.querySelector(el)
 }
@@ -204,7 +211,7 @@ function taskData(){
 </section>
 `;
             $('#tasks').innerHTML+=html;
-            taskId++;
+            taskId=(taskId==0)? 1:0;
         }
         setId++;
     }
@@ -217,6 +224,7 @@ function done(){
     }else{
         data.workout++;
     }
+    localStorage.setItem("gymData",`${JSON.stringify(data)}`);
     taskData();
 }
 function eachTask(cnd,el,setId,taskId){
@@ -224,14 +232,14 @@ function eachTask(cnd,el,setId,taskId){
     if(cnd){
         //increese
         let work=(data.arr[data.workout][setId][taskId]);
-        console.log(work)
         if((work.status)){
             if(work.repeat==16){
-                work.repeat=4;
+                work.repeat=2;
                 work.weight+=5;
             }else{
-                work.repeat+=4;
+                work.repeat+=2;
             }
         }
     }
+    localStorage.setItem("gymData",`${JSON.stringify(data)}`);
 }
