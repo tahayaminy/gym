@@ -1,186 +1,127 @@
-let data = {
-    arr: [
-        [
-            [
-                {
-                    "task": "شنا",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                },
-                {
-                    "task": "ساعد هالتر",
-                    "repeat": 8,
-                    "weight": 20,
-                    "status": true
-                }
-            ],
-            [
-                {
-                    "task": "شکم",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                },
-                {
-                    "task": "سرشانه از جلو",
-                    "repeat": 10,
-                    "weight": 20,
-                    "status": true
-                }
-            ],
-            [
-                {
-                    "task": "پرس بالا سینه",
-                    "repeat": 10,
-                    "weight": 30,
-                    "status": true
-                },
-                {
-                    "task": "دمبل آرنولدی",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                }
-            ]
-        ],
-        [
-            [
-                {
-                    "task": "شکم",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                },
-                {
-                    "task": "پارالل",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                }
-            ],
-            [
-                {
-                    "task": "پرس زیر سینه",
-                    "repeat": 10,
-                    "weight": 30,
-                    "status": true
-                },
-                {
-                    "task": "دمبل نشر جانب",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                }
-            ],
-            [
-                {
-                    "task": "پرس سینه",
-                    "repeat": 10,
-                    "weight": 30,
-                    "status": true
-                },
-                {
-                    "task": "جلو بازو هالتر",
-                    "repeat": 8,
-                    "weight": 20,
-                    "status": true
-                }
-            ]
-        ],
-        [
-            [
-                {
-                    "task": "شنا دست جمع",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                },
-                {
-                    "task": "مچ دست هالتر",
-                    "repeat": 16,
-                    "weight": 5,
-                    "status": true
-                }
-            ],
-            [
-                {
-                    "task": "شکم",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                },
-                {
-                    "task": "سرشانه از عقب",
-                    "repeat": 10,
-                    "weight": 20,
-                    "status": true
-                }
-            ],
-            [
-                {
-                    "task": "پرس بالا سینه",
-                    "repeat": 10,
-                    "weight": 30,
-                    "status": true
-                },
-                {
-                    "task": "نشر از جلو صفحه",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                }
-            ]
-        ],
-        [
-            [
-                {
-                    "task": "شکم",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                },
-                {
-                    "task": "دیپ",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                }
-            ],
-            [
-                {
-                    "task": "پرس زیر سینه",
-                    "repeat": 10,
-                    "weight": 30,
-                    "status": true
-                },
-                {
-                    "task": "دمبل نشر جانب",
-                    "repeat": null,
-                    "weight": null,
-                    "status": false
-                }
-            ],
-            [
-                {
-                    "task": "پرس سینه",
-                    "repeat": 10,
-                    "weight": 30,
-                    "status": true
-                },
-                {
-                    "task": "جلو بازو هالتر",
-                    "repeat": 8,
-                    "weight": 20,
-                    "status": true
-                }
-            ]
-        ]
+let barname1=`[
+    [
+        {
+            "task": "شنا",
+            "repeat": null,
+            "weight": null,
+            "status": false
+        },
+        {
+            "task": "شنا دست جمع",
+            "repeat": null,
+            "weight": null,
+            "status": false
+        }
     ],
-    workout: 0,
-    number: 1
+    [
+        {
+            "task": "ساعد هالتر",
+            "repeat": 8,
+            "weight": 20,
+            "status": true
+        },
+        {
+            "task": "مچ دست هالتر",
+            "repeat": 2,
+            "weight": 10,
+            "status": true
+        }
+    ],
+    {
+        "task": "شکم",
+        "repeat": null,
+        "weight": null,
+        "status": false
+    },
+    [
+        {
+            "task": "سرشانه از جلو",
+            "repeat": 10,
+            "weight": 20,
+            "status": true
+        },
+        {
+            "task": "سرشانه از عقب",
+            "repeat": 10,
+            "weight": 20,
+            "status": true
+        }
+    ],
+    {
+        "task": "پرس بالا سینه",
+        "repeat": 12,
+        "weight": 30,
+        "status": true
+    },
+    [
+        {
+            "task": "دمبل آرنولدی",
+            "repeat": null,
+            "weight": null,
+            "status": false
+        },
+        {
+            "task": "نشر از جلو صفحه",
+            "repeat": null,
+            "weight": null,
+            "status": false
+        }
+    ]
+]`;
+let barname2=`[
+  {
+    "task": "شکم",
+    "repeat": null,
+    "weight": null,
+    "status": false
+  },
+  [
+    {
+      "task": "پارالل",
+      "repeat": null,
+      "weight": null,
+      "status": false
+    },
+    {
+      "task": "دیپ",
+      "repeat": null,
+      "weight": null,
+      "status": false
+    }
+  ],
+  {
+    "task": "پرس زیر سینه",
+    "repeat": 10,
+    "weight": 30,
+    "status": true
+  },
+  {
+    "task": "دمبل نشر جانب",
+    "repeat": null,
+    "weight": null,
+    "status": false
+  },
+  {
+    "task": "پرس سینه",
+    "repeat": 10,
+    "weight": 30,
+    "status": true
+  },
+  {
+    "task": "جلو بازو هالتر",
+    "repeat": 8,
+    "weight": 20,
+    "status": true
+  }
+]`;
+let data ={
+    arr:[JSON.parse(barname1),JSON.parse(barname2)],
+    turn:0,
+    number:1,
+    workout:0
 };
 let dataWR;
+console.log(data)
 if(localStorage.getItem("gymData")===null){
     localStorage.setItem("gymData",`${JSON.stringify(data)}`);
 }else{
