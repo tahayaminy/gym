@@ -1,4 +1,4 @@
-let barname1=`[
+let barname1 = `[
     [
         {
             "task": "شنا",
@@ -68,7 +68,7 @@ let barname1=`[
         }
     ]
 ]`;
-let barname2=`[
+let barname2 = `[
   {
     "task": "شکم",
     "repeat": null,
@@ -114,80 +114,107 @@ let barname2=`[
     "status": true
   }
 ]`;
-let data ={
-    arr:[JSON.parse(barname1),JSON.parse(barname2)],
-    turn:0,
-    number:1,
-    workout:0
+let data = {
+    arr: [JSON.parse(barname1), JSON.parse(barname2)],
+    turn: 0,
+    number: 1,
+    workout: 0
 };
 let dataWR;
-console.log(data)
-if(localStorage.getItem("gymData")===null){
-    localStorage.setItem("gymData",`${JSON.stringify(data)}`);
-}else{
-    dataWR=localStorage.getItem("gymData");
-    data=JSON.parse(dataWR);
+
+
+if (localStorage.getItem("gymData") === null) {
+    localStorage.setItem("gymData", `${JSON.stringify(data)}`);
+} else {
+    dataWR = localStorage.getItem("gymData");
+    data = JSON.parse(dataWR);
 }
+
 const $ = el => {
     return document.querySelector(el)
 }
 
-function taskData(){
-    $('#tasks').innerHTML='';
-    let taskId=0;
-    let setId=0;
-    for (let set of data.arr[data.workout]) {
+function taskData() {
+    $('#tasks').innerHTML = '';
+    let setId = 0;
+    for (let workout of data.arr[data.workout]) {
 
-        for (let task of set) {
+        if (Array.isArray(workout)) {
             let html = `
-<section class="flex items-center mb-2 p-2">
-    <div>
-        <p>${task.task}</p>
-        <p class="text-xs ${(task.status)?'':'hidden'} opacity-75">${task.repeat}بار ${task.weight}KG وزن</p>
-    </div>
-    <div class="mr-auto">
-        <i onclick="eachTask(true,this,${setId},${taskId})" class="px-3 py-1.5 rounded inline-flex items-center bi bi-check"></i>
-        <i onclick="eachTask(false,this,${setId},${taskId})" class="px-3 py-1.5 rounded inline-flex items-center bi bi-arrow-repeat"></i>
-    </div>
-</section>
-`;
-            $('#tasks').innerHTML+=html;
-            taskId=(taskId==0)? 1:0;
+                            <section class="flex items-center mb-2 p-2">
+                                <div>
+                                    <p>${workout[data.turn].task}</p>
+                                    <p class="text-xs ${(workout[data.turn].status) ? '' : 'hidden'} opacity-75">${workout[data.turn].repeat}بار ${workout[data.turn].weight}KG وزن</p>
+                                </div>
+                                <div class="mr-auto">
+                                    <i onclick="eachTask(true,this,${setId},data.turn)" class="px-3 py-1.5 rounded inline-flex items-center bi bi-check"></i>
+                                    <i onclick="eachTask(false,this,${setId},data.turn)" class="px-3 py-1.5 rounded inline-flex items-center bi bi-arrow-repeat"></i>
+                                </div>
+                            </section>
+                            `;
+            $('#tasks').innerHTML += html;
+        } else {
+                let html = `
+                            <section class="flex items-center mb-2 p-2">
+                                <div>
+                                    <p>${workout.task}</p>
+                                    <p class="text-xs ${(workout.status) ? '' : 'hidden'} opacity-75">${workout.repeat}بار ${workout.weight}KG وزن</p>
+                                </div>
+                                <div class="mr-auto">
+                                    <i onclick="eachTask(true,this,${setId},null)" class="px-3 py-1.5 rounded inline-flex items-center bi bi-check"></i>
+                                    <i onclick="eachTask(false,this,${setId},null)" class="px-3 py-1.5 rounded inline-flex items-center bi bi-arrow-repeat"></i>
+                                </div>
+                            </section>
+                            `;
+                $('#tasks').innerHTML += html;
         }
         setId++;
     }
-    $('#abs').setAttribute('src',`./data/abs/${data.number}.jpg`)
+    $('#abs').setAttribute('src', `./data/abs/${data.number}.jpg`)
 }
+
 taskData();
 
-function done(){
-    if(data.workout==3){
-        data.workout=0;
-    }else{
-        data.workout++;
-    }
-    if(data.number==16){
-        data.number=1;
-    }else{
-        data.number++;
-    }
-
-    localStorage.setItem("gymData",`${JSON.stringify(data)}`);
-    taskData();
-}
-function eachTask(cnd,el,setId,taskId){
+function eachTask(cnd, el, setId, taskId) {
     el.parentElement.parentElement.remove();
-    if(cnd){
-        //increese
-        let work=(data.arr[data.workout][setId][taskId]);
-        if((work.status)){
-            if(work.repeat==16){
-                work.repeat=2;
-                work.weight+=5;
-            }else{
-                work.repeat+=2;
+    if (cnd) {
+        if(taskId!=null) {
+            let work = (data.arr[data.workout][setId][taskId]);
+            if ((work.status)) {
+                if (work.repeat == 16) {
+                    work.repeat = 2;
+                    work.weight += 5;
+                } else {
+                    work.repeat += 2;
+                }
+            }
+        }else{
+            let work = (data.arr[data.workout][setId]);
+            if ((work.status)) {
+                if (work.repeat == 16) {
+                    work.repeat = 2;
+                    work.weight += 5;
+                } else {
+                    work.repeat += 2;
+                }
             }
         }
     }
-    localStorage.setItem("gymData",`${JSON.stringify(data)}`);
+    localStorage.setItem("gymData", `${JSON.stringify(data)}`);
+}
+
+function done() {
+    if (data.workout == 3) {
+        data.workout = 0;
+    } else {
+        data.workout++;
+    }
+    if (data.number == 16) {
+        data.number = 1;
+    } else {
+        data.number++;
+    }
+
+    localStorage.setItem("gymData", `${JSON.stringify(data)}`);
+    taskData();
 }
