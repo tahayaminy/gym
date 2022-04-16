@@ -116,7 +116,8 @@ let barname2 = `[
 ]`;
 let data = {
     arr: [JSON.parse(barname1), JSON.parse(barname2)],
-    turn: 0,
+    turnarr: [0,0,1,1],
+    turn:0,
     number: 1,
     workout: 0
 };
@@ -143,12 +144,12 @@ function taskData() {
             let html = `
                             <section class="flex items-center mb-2 p-2">
                                 <div>
-                                    <p>${workout[data.turn].task}</p>
-                                    <p class="text-xs ${(workout[data.turn].status) ? '' : 'hidden'} opacity-75">${workout[data.turn].repeat}بار ${workout[data.turn].weight}KG وزن</p>
+                                    <p>${workout[data.turnarr[data.turn]].task}</p>
+                                    <p class="text-xs ${(workout[data.turnarr[data.turn]].status) ? '' : 'hidden'} opacity-75">${workout[data.turnarr[data.turn]].repeat}بار ${workout[data.turnarr[data.turn]].weight}KG وزن</p>
                                 </div>
                                 <div class="mr-auto">
-                                    <i onclick="eachTask(true,this,${setId},data.turn)" class="px-3 py-1.5 rounded inline-flex items-center bi bi-check"></i>
-                                    <i onclick="eachTask(false,this,${setId},data.turn)" class="px-3 py-1.5 rounded inline-flex items-center bi bi-arrow-repeat"></i>
+                                    <i onclick="eachTask(true,this,${setId},data.turnarr[data.turn])" class="px-3 py-1.5 rounded inline-flex items-center bi bi-check"></i>
+                                    <i onclick="eachTask(false,this,${setId},data.turnarr[data.turn])" class="px-3 py-1.5 rounded inline-flex items-center bi bi-arrow-repeat"></i>
                                 </div>
                             </section>
                             `;
@@ -204,17 +205,9 @@ function eachTask(cnd, el, setId, taskId) {
 }
 
 function done() {
-    if (data.workout == 3) {
-        data.workout = 0;
-    } else {
-        data.workout++;
-    }
-    if (data.number == 16) {
-        data.number = 1;
-    } else {
-        data.number++;
-    }
-
+    data.workout=(data.workout==1) ? 0 : 1;
+    data.number=(data.number==16) ? 1 : data.number+1;
+    data.turn=(data.turn==3) ? 0 : data.turn+1;
     localStorage.setItem("gymData", `${JSON.stringify(data)}`);
     taskData();
 }
