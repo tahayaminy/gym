@@ -211,3 +211,30 @@ function done() {
     localStorage.setItem("gymData", `${JSON.stringify(data)}`);
     taskData();
 }
+var progressValue=0;
+function calcProgress(){
+    for(let array of data.arr){
+        for(let item of array){
+            if(Array.isArray(item)){
+                for(let task of item){
+                    if(task.status){
+                        calc(task.repeat,task.weight)
+                        console.log(task)
+                    }
+                }
+            }else{
+                if(item.status){
+                    calc(item.repeat,item.weight)
+                    console.log(item)
+                }
+            }
+        }
+    }
+    function calc(repeat,weight){
+        progressValue+=repeat*weight;
+        console.log(progressValue)
+        let calced=(progressValue*100)/7680;
+        $('#progress-num').innerText=calced.toFixed(2);
+    }
+}
+calcProgress();

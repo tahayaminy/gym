@@ -13,6 +13,9 @@ $blue:#556FB5;
     scrollbar-width: none;  /* Firefox */
   }
 }
+.text-blue{
+  color:$blue;
+}
 @mixin bold {
   font-weight: 900;
   font-variation-settings: "wght" 900, "dots" 7;
@@ -49,4 +52,23 @@ body{
   background-color: $red;
   color: #fff;
   cursor: pointer;
+}
+.progress-bar{
+  background-color: $blue;
+  height: 20px;
+  .progress-cont{
+    .title{
+      height: 10px;
+      width: 1px;
+      background-color: $light;
+      position: absolute;
+      top: 0;
+    }
+    width: 100%;
+    .progress-val{
+      width: 28%;
+      background-color: $red;
+      height: 10px;
+    }
+  }
 }
