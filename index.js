@@ -235,6 +235,7 @@ function calcProgress(){
         console.log(progressValue)
         let calced=(progressValue*100)/7680;
         $('#progress-num').innerText=calced.toFixed(2);
+        $('.progress-val').style.width=`${calced}%`;
     }
 }
 calcProgress();
