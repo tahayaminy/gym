@@ -182,7 +182,7 @@ function eachTask(cnd, el, setId, taskId) {
         if(taskId!=null) {
             let work = (data.arr[data.workout][setId][taskId]);
             if ((work.status)) {
-                if (work.repeat == 16) {
+                if (work.repeat == 8) {
                     work.repeat = 2;
                     work.weight += 5;
                 } else {
@@ -192,7 +192,7 @@ function eachTask(cnd, el, setId, taskId) {
         }else{
             let work = (data.arr[data.workout][setId]);
             if ((work.status)) {
-                if (work.repeat == 16) {
+                if (work.repeat == 8) {
                     work.repeat = 2;
                     work.weight += 5;
                 } else {
@@ -206,12 +206,13 @@ function eachTask(cnd, el, setId, taskId) {
 
 function done() {
     data.workout=(data.workout==1) ? 0 : 1;
-    data.number=(data.number==16) ? 1 : data.number+1;
+    data.number=(data.number==8) ? 1 : data.number+1;
     data.turn=(data.turn==3) ? 0 : data.turn+1;
     localStorage.setItem("gymData", `${JSON.stringify(data)}`);
     taskData();
 }
 var progressValue=0;
+let totalValue=0;
 function calcProgress(){
     for(let array of data.arr){
         for(let item of array){
@@ -219,7 +220,6 @@ function calcProgress(){
                 for(let task of item){
                     if(task.status){
                         calc(task.repeat,task.weight)
-                        console.log(task)
                     }
                 }
             }else{
@@ -232,8 +232,8 @@ function calcProgress(){
     }
     function calc(repeat,weight){
         progressValue+=repeat*weight;
-        console.log(progressValue)
-        let calced=(progressValue*100)/7680;
+        totalValue+=(8*60);
+        let calced=(progressValue*100)/totalValue;
         $('#progress-num').innerText=calced.toFixed(2);
         $('.progress-val').style.width=`${calced}%`;
     }
